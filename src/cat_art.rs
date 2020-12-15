@@ -7,5 +7,5 @@ pub static CAT_UPPER: &'static [&'static str] = &[
 pub static CAT_LOWER: &'static [&'static str] = &[
     "─┬────┬─",
     " ╰U┬─U╯ ",
-    "   ╯   "
+    "   ╯    "
 ];
