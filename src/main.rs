@@ -1,23 +1,25 @@
-use catcat::format_cat_part;
-use std::{env, fs};
-use terminal_size::{terminal_size, Width};
+use catcat::write_output;
+use std::env;
+use std::error::Error;
+use std::fs::File;
+use std::io::{self, prelude::*};
 
-mod cat_art;
-use cat_art::*;
-
-fn main() {
+fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
 
-    let filename = &args[1];
-
-    let text = fs::read_to_string(filename).expect("Error reading file");
-
-    if let Some((Width(width), _)) = terminal_size() {
-        println!(
-            "{}",
-            format_cat_part(CAT_UPPER, CAT_UPPER.len() - 1, '─', width)
-        );
-        println!("{}", text.trim());
-        println!("{}", format_cat_part(CAT_LOWER, 0, '─', width));
+    match args.len() {
+        1 => {
+            // No filename was provided; use stdin.
+            write_output(io::stdin().lock().lines())?;
+        }
+        2 => {
+            // Filename was provided; use that.
+            write_output(io::BufReader::new(File::open(&args[1])?).lines())?;
+        }
+        _ => {
+            eprintln!("usage: catcat [file]");
+        }
     }
+
+    Ok(())
 }
