@@ -1,7 +1,7 @@
 [package]
 name = "catcat"
 description = "A version of the GNU/Linux cat command which also depicts a cat"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["lyra"]
 license = "MIT"
 edition = "2018"

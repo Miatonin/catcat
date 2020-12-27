@@ -69,7 +69,7 @@ mod tests {
         let padded_row = get_padded_row("hello", 15, Some('-'));
         assert_eq!(
             padded_row,
-            "-----hello-----".to_string(),
+            "-----hello-----\n".to_string(),
             "`get_padded_row` was not correct, got `{}`",
             padded_row,
         );
